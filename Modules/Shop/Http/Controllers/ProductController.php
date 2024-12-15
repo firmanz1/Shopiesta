@@ -4,9 +4,9 @@ namespace Modules\Shop\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 
-class ShopController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('shop::index');
+        return view('themes.shop.products.index'); // Ubah sesuai struktur module Anda
     }
 
     /**
