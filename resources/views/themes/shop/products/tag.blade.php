@@ -20,7 +20,7 @@
             <section class="col-lg-9 col-md-12 products">
                 <div class="card mb-4 bg-light border-0 section-header">
                     <div class="card-body p-5">
-                        <h2 class="mb-0">Accessories</h2>
+                        <h2 class="mb-0">Tag: {{ $tag->name }}</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -30,10 +30,24 @@
                         </div>
                         <div class="d-flex mt-2 mt-lg-0">
                             <div class="me-2 flex-grow-1">
-                                &nbsp;
+                                <!-- select option -->
+                                <select class="form-select">
+                                    <option selected="">Show: 50</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                </select>
                             </div>
                             <div>
-                               {!! html()->select('sorting', $sortingOptions, $sortingQuery)->class(['form-select'])->attribute('onchange', 'this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);') !!}
+                                <!-- select option -->
+                                <select class="form-select">
+                                    <option selected="">Sort by: Featured</option>
+                                    <option value="Low to High">Price: Low to High</option>
+                                    <option value="High to Low"> Price: High to Low</option>
+                                    <option value="Release Date"> Release Date</option>
+                                    <option value="Avg. Rating"> Avg. Rating</option>
+
+                                </select>
                             </div>
                         </div>
                     </div>

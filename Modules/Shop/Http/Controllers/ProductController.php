@@ -7,89 +7,140 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
+use Modules\Shop\Repositories\Front\Interfaces\CategoryRepositoryInterface;
+use Modules\Shop\Repositories\Front\Interfaces\TagRepositoryInterface;
 
 class ProductController extends Controller
 {
     protected $productRepository;
+    protected $categoryRepository;
+    protected $tagRepository;
+    protected $defaultPriceRange;
+    protected $sortingQuery;
 
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository, TagRepositoryInterface $tagRepository)
     {
         parent::__construct();
 
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->tagRepository = $tagRepository;
+        $this->defaultPriceRange = [
+            'min' => 10000,
+            'max' => 75000,
+        ];
+
+        $this->data['categories'] = $this->categoryRepository->findAll();
+        $this->data['filter']['price'] = $this->defaultPriceRange;
+
+        $this->sortingQuery = null;
+        $this->data['sortingQuery'] = $this->sortingQuery;
+        $this->data['sortingOptions'] = [
+            '' => '-- Sort Products --',
+            '?sort=price&order=asc' => 'Price: Low to High',
+            '?sort=price&order=desc' => 'Price: High to Low',
+            '?sort=publish_date&order=desc' => 'Newest Item',
+        ];
     }
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        $priceFilter = $this->getPriceRangeFilter($request);
+
         $options = [
             'per_page' => $this->perPage,
+            'filter' => [
+                'price' => $priceFilter,
+            ],
         ];
 
-        $this->data['products'] = $this->productRepository->findAll($options);
+        if ($request->get('price')) {
+            $this->data['filter']['price'] = $priceFilter;
+        }
 
+        if ($request->get('sort')) {
+            $sort = $this->sortingRequest($request);
+            $options['sort'] = $sort;
+
+            $this->sortingQuery = '?sort=' . $sort['sort'] . '&order=' . $sort['order'];
+            
+            $this->data['sortingQuery'] = $this->sortingQuery;
+        }
+        
+        $this->data['products'] = $this->productRepository->findAll($options);
+        
         return $this->loadTheme('products.index', $this->data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create()
+    public function category($categorySlug)
     {
-        return view('shop::create');
+        $category = $this->categoryRepository->findBySlug($categorySlug);
+
+        $options = [
+            'per_page' => $this->perPage,
+            'filter' => [
+                'category' => $categorySlug,
+            ]
+        ];
+
+        $this->data['products'] = $this->productRepository->findAll($options);
+        $this->data['category'] = $category;
+
+        return $this->loadTheme('products.category', $this->data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
+    public function tag($tagSlug)
     {
-        //
+        $tag = $this->tagRepository->findBySlug($tagSlug);
+        
+        $options = [
+            'per_page' => $this->perPage,
+            'filter' => [
+                'tag' => $tagSlug,
+            ]
+        ];
+
+        $this->data['products'] = $this->productRepository->findAll($options);
+        $this->data['tag'] = $tag;
+
+        return $this->loadTheme('products.tag', $this->data);
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
+    function getPriceRangeFilter($request)
     {
-        return view('shop::show');
+        if (!$request->get('price')) {
+            return [];
+        }
+
+        $prices = explode(' - ', $request->get('price'));
+        if (count($prices) < 0) {
+            return $this->defaultPriceRange;
+        }
+
+        return [
+            'min' => (int) $prices[0],
+            'max' => (int) $prices[1],
+        ];
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('shop::edit');
-    }
+    function sortingRequest(Request $request) {
+        $sort = [];
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        if ($request->get('sort') && $request->get('order')) {
+            $sort = [
+                'sort' => $request->get('sort'),
+                'order' => $request->get('order'),
+            ];
+        } else if ($request->get('sort')) {
+            $sort = [
+                'sort' => $request->get('sort'),
+                'order' => 'desc',
+            ];
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
+        return $sort;
     }
 }
