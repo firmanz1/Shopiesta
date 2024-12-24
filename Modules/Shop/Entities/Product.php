@@ -13,34 +13,34 @@ class Product extends Model
 
     protected $fillable = [
         'parent_id',
-        'user_id',
-        'sku',
-        'type',
-        'name',
-        'slug',
-        'price',
+		'user_id',
+		'sku',
+		'type',
+		'name',
+		'slug',
+		'price',
         'featured_image',
         'sale_price',
-        'status',
-        'stock_status',
-        'manage_stock',
-        'publish_date',
-        'excerpt',
-        'body',
-        'metas',
+		'status',
+		'stock_status',
+		'manage_stock',
+		'publish_date',
+		'excerpt',
+		'body',
+		'metas',
     ];
 
     protected $table = 'shop_products';
 
     public const DRAFT = 'DRAFT';
-    public const ACTIVE = 'ACTIVE';
-    public const INACTIVE = 'INACTIVE';
+	public const ACTIVE = 'ACTIVE';
+	public const INACTIVE = 'INACTIVE';
 
     public const STATUSES = [
-        self::DRAFT => 'Draft',
-        self::ACTIVE => 'Active',
-        self::INACTIVE => 'Inactive',
-    ];
+		self::DRAFT => 'Draft',
+		self::ACTIVE => 'Active',
+		self::INACTIVE => 'Inactive',
+	];
 
     public const STATUS_IN_STOCK = 'IN_STOCK';
     public const STATUS_OUT_OF_STOCK = 'OUT_OF_STOCK';
@@ -50,13 +50,13 @@ class Product extends Model
         self::STATUS_OUT_OF_STOCK => 'Out of Stock',
     ];
 
-    public const SIMPLE = 'SIMPLE';
-    public const CONFIGURABLE = 'CONFIGURABLE';
-    public const TYPES = [
-        self::SIMPLE => 'Simple',
-        self::CONFIGURABLE => 'Configurable',
-    ];
-
+	public const SIMPLE = 'SIMPLE';
+	public const CONFIGURABLE = 'CONFIGURABLE';
+	public const TYPES = [
+		self::SIMPLE => 'Simple',
+		self::CONFIGURABLE => 'Configurable',
+	];
+    
     protected static function newFactory()
     {
         return \Modules\Shop\Database\factories\ProductFactory::new();
@@ -73,9 +73,9 @@ class Product extends Model
     }
 
     public function variants()
-    {
-        return $this->hasMany('Modules\Shop\Entities\Product', 'parent_id')->orderBy('price', 'ASC');
-    }
+	{
+		return $this->hasMany('Modules\Shop\Entities\Product', 'parent_id')->orderBy('price', 'ASC');
+	}
 
     public function categories()
     {
@@ -88,17 +88,48 @@ class Product extends Model
     }
 
     public function attributes()
-    {
-        return $this->hasMany(ProductAttribute::class, 'product_id');
-    }
+	{
+		return $this->hasMany(ProductAttribute::class, 'product_id');
+	}
 
     public function images()
-    {
-        return $this->hasMany('Modules\Shop\Entities\ProductImage', 'product_id');
-    }
+	{
+		return $this->hasMany('Modules\Shop\Entities\ProductImage', 'product_id');
+	}
 
     public function getPriceLabelAttribute()
     {
         return number_format($this->price);
+    }
+
+    public function getHasSalePriceAttribute()
+    {
+        return $this->sale_price != null;
+    }
+
+    public function getSalePriceLabelAttribute()
+    {
+        return number_format($this->sale_price);
+    }
+
+    public function getDiscountPercentAttribute()
+    {
+        $discountPercent = (($this->price - $this->sale_price) / $this->price) * 100;
+
+        return number_format($discountPercent);
+    }
+
+    public function getStockStatusLabelAttribute()
+    {
+        return self::STOCK_STATUSES[$this->stock_status];
+    }
+
+    public function getStockAttribute()
+    {
+        if (!$this->inventory) {
+            return 0;
+        }
+
+        return $this->inventory->qty;
     }
 }

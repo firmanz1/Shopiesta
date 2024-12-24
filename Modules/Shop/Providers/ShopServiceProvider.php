@@ -4,13 +4,13 @@ namespace Modules\Shop\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-
+use Modules\Shop\Repositories\Front\CartRepository;
 use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
 use Modules\Shop\Repositories\Front\ProductRepository;
 
 use Modules\Shop\Repositories\Front\Interfaces\CategoryRepositoryInterface;
 use Modules\Shop\Repositories\Front\CategoryRepository;
-
+use Modules\Shop\Repositories\Front\Interfaces\CartRepositoryInterface;
 use Modules\Shop\Repositories\Front\Interfaces\TagRepositoryInterface;
 use Modules\Shop\Repositories\Front\TagRepository;
 
@@ -61,7 +61,8 @@ class ShopServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'),
+            $this->moduleNameLower
         );
     }
 
@@ -137,6 +138,11 @@ class ShopServiceProvider extends ServiceProvider
         $this->app->bind(
             TagRepositoryInterface::class,
             TagRepository::class
+        );
+
+        $this->app->bind(
+            CartRepositoryInterface::class,
+            CartRepository::class
         );
     }
 }

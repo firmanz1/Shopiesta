@@ -7,8 +7,7 @@ use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\Tag;
 use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
 
-class ProductRepository implements ProductRepositoryInterface
-{
+class ProductRepository implements ProductRepositoryInterface {
 
     public function findAll($options = [])
     {
@@ -54,5 +53,10 @@ class ProductRepository implements ProductRepositoryInterface
         }
 
         return $products->get();
+    }
+
+    public function findBySKU($sku)
+    {
+        return Product::where('sku', $sku)->firstOrFail();
     }
 }
