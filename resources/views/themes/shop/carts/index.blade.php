@@ -23,6 +23,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-7">
                         {{ html()->form('PUT', route('carts.update'))->open() }}
+                        @csrf
                         <ul class="list-group list-group-flush">
                             @foreach ($cart->items as $item)
                             <li class="list-group-item py-3 border-top">
@@ -36,10 +37,10 @@
                                                 </a>
                                                 <span>
                                                     @if ($item->product->has_sale_price)
-                                                        <small>IDR {{ $item->product->sale_price_label }}</small>
-                                                        <small class="text-muted text-decoration-line-through">{{ $item->product->price_label }}</small>
+                                                    <small>IDR {{ $item->product->sale_price_label }}</small>
+                                                    <small class="text-muted text-decoration-line-through">{{ $item->product->price_label }}</small>
                                                     @else
-                                                        <small>IDR {{ $item->product->price_label }}</small>
+                                                    <small>IDR {{ $item->product->price_label }}</small>
                                                     @endif
                                                 </span>
                                                 <div class="mt-2 small lh-1">
@@ -70,7 +71,7 @@
                         {{ html()->form()->close() }}
                     </div>
                     <div class="col-12 col-lg-4 col-md-5">
-                        <div class="mb-5 card mt-6">
+                        <div class="mb-5 card mt-6 shadow">
                             <div class="card-body p-6">
                                 <!-- heading -->
                                 <h2 class="h5 mb-4">Summary</h2>
@@ -109,10 +110,10 @@
                                 </div>
                                 <div class="d-grid mb-1 mt-4">
                                     <!-- btn -->
-                                    <button class="btn btn-first btn-lg d-flex justify-content-between align-items-center" type="submit">
+                                    <a class="btn btn-first btn-lg d-flex justify-content-between align-items-center" href="{{ route('orders.checkout') }}">
                                         Go to Checkout
                                         <span class="fw-bold">{{ $cart->grand_total_label }}</span>
-                                    </button>
+                                    </a>
                                 </div>
                                 <!-- text -->
                                 <p>

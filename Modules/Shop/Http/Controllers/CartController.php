@@ -18,6 +18,7 @@ class CartController extends Controller
 
     public function __construct(CartRepositoryInterface $cartRepository, ProductRepositoryInterface $productRepository)
     {
+        $this->middleware('auth');
         $this->cartRepository = $cartRepository;
         $this->productRepository = $productRepository;
     }
@@ -26,13 +27,24 @@ class CartController extends Controller
      * @return Renderable
      */
     public function index()
-    {
-        $cart = $this->cartRepository->findByUser(auth()->user());
-        $this->data['cart'] = $cart;
-
-        return $this->loadTheme('carts.index', $this->data);
+{
+    // Periksa apakah pengguna sudah login
+    if (!auth()->check()) {
+        return redirect(route('login'))->with('error', 'Anda harus login untuk melihat keranjang');
     }
 
+    // Ambil data pengguna
+    $user = auth()->user();
+
+    // Ambil keranjang berdasarkan user
+    $cart = $this->cartRepository->findByUser($user);
+
+    $this->data['cart'] = $cart;
+
+    return $this->loadTheme('carts.index', $this->data);
+}
+
+ 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
@@ -41,7 +53,6 @@ class CartController extends Controller
     {
         return view('shop::create');
     }
-
     /**
      * Store a newly created resource in storage.
      * @param Request $request
@@ -98,6 +109,7 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
+        dd(request()->all());
         $items = $request->get('qty');
         $this->cartRepository->updateQty($items);
 

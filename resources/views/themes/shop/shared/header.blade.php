@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light fixed-top py-4 shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="#">Indo<span>Toko</span></a>
+        <a class="navbar-brand" href="#">Sopi<span>esta</span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -45,7 +45,7 @@
         </div>
     </nav><nav class="navbar navbar-expand-lg bg-light fixed-top py-4 shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="#">Indo<span>Toko</span></a>
+        <a class="navbar-brand" href="#">Sopi<span>esta</span></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

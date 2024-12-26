@@ -6,4 +6,4 @@ interface CategoryRepositoryInterface
 {
     public function findAll($options = []);
     public function findBySlug($slug);
-}   
+}

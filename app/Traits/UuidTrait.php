@@ -20,7 +20,7 @@ trait UuidTrait
     {
         return false;
     }
-
+    
     public function getKeyType()
     {
         return 'string';

@@ -59,24 +59,30 @@
                     </div>
                     <div class="price">
                         @if ($product->hasSalePrice)
-                        <span class="active-price text-dark">IDR {{ $product->sale_price_label }}</span>
-                        <span class="text-decoration-line-through text-muted ms-1">{{ $product->price_label }}</span>
-                        <span><small class="discount-percent ms-2 text-danger">{{ $product->discount_percent }}% Off</small></span>
+                            <span class="active-price text-dark">IDR {{ $product->sale_price_label }}</span>
+                            <span class="text-decoration-line-through text-muted ms-1">{{ $product->price_label }}</span>
+                            <span><small class="discount-percent ms-2 text-danger">{{ $product->discount_percent }}% Off</small></span>
                         @else
-                        <span class="active-price text-dark">IDR {{ $product->price_label }}</span>
+                            <span class="active-price text-dark">IDR {{ $product->price_label }}</span>
                         @endif
                     </div>
                     <hr class="my-6">
                     <div class="product-select mt-3 row justify-content-start g-2 align-items-center">
-                        <div class="col-md-2 col-2">
-                            <input type="number" name="qty" value="1" class="form-control" min="1" />
+                        @include ('themes.shop.shared.flash')
+                        {{ html()->form('post', route('carts.store'))->open() }}
+                        <input type="hidden" name="product_id" value="{{ $product->id }}"/>
+                        <div class="row">
+                            <div class="col-md-2 col-2">
+                                <input type="number" name="qty" value="1" class="form-control" min="1" />
+                            </div>
+                            <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
+                                <button type="submit" class="btn btn-add-cart"><i class="bx bx-cart-alt"></i> Add to cart</button>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <a class="btn btn-light" href="shop-wishlist.html" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Wishlist"><i class="bx bx-heart"></i></a>
+                            </div>
                         </div>
-                        <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
-                            <button type="button" class="btn btn-add-cart"><i class="bx bx-cart-alt"></i> Add to cart</button>
-                        </div>
-                        <div class="col-md-4 col-4">
-                            <a class="btn btn-light" href="shop-wishlist.html" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Wishlist"><i class="bx bx-heart"></i></a>
-                        </div>
+                        {{ html()->form()->close() }}
                     </div>
                     <hr class="my-6">
                     <div class="product-info">
@@ -125,7 +131,7 @@
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active p-3" id="nav-product-details" role="tabpanel" aria-labelledby="nav-product-details-tab">
                         <div class="my-8">
-                            <p>{!! $product->body !!}</p>
+                        <p>{!! $product->body !!}</p>
                         </div>
                     </div>
                     <div class="tab-pane fade p-3" id="nav-product-reviews" role="tabpanel" aria-labelledby="nav-product-reviews-tab">

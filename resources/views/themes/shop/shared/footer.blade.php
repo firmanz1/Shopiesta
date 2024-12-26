@@ -2,7 +2,7 @@
     <div class="container pt-5">
       <div class="row row-content">
         <div class="col-md-6">
-          <h1 class="logo-brand">Indo <span>Toko</span></h1>
+          <h1 class="logo-brand">Sopi<span>esta</span></h1>
           <p>Lorem ipsum dolor sit amet</p>
         </div>
         <div class="col-md-3 mt-4 mt-sm-0">
@@ -17,8 +17,8 @@
         </div>
         <div class="col-md-3 mt-4 mt-sm-0">
           <h3 class="mb-3">Company</h3>
-          <a href="#">john@example.com</a>
-          <p>Jln. Tamansiswa, No 32 Yogyakarta Indonesia</p>
+          <a href="#">TryHard@cobacoba</a>
+          <p>Jln. Jalanin Aja Dulu</p>
         </div>
       </div>
       <div class="row row-copy mt-4 mt-sm-0">
