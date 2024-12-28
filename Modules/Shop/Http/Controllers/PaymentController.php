@@ -22,7 +22,7 @@ class PaymentController extends Controller
                 return response(['code' => 403, 'message' => 'Invalid Signature Key'], 403);
             }
         }
-        
+
         $this->initPaymentGateway();
         $paymentNotification = new \Midtrans\Notification();
 

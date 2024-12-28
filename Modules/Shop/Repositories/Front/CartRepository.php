@@ -30,6 +30,8 @@ class CartRepository implements CartRepositoryInterface
 
         return $cart;
     }
+    protected $fillable = ['tax_percent'];
+
 
     public function addItem($product, $qty): CartItem
     {

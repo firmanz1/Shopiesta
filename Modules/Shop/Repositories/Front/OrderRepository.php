@@ -25,7 +25,7 @@ class OrderRepository implements OrderRepositoryInterface
 
         return $order;
     }
-
+    
     private function prepareOrderParams(User $user, Cart $cart, Address $address, $shipping = []): array
     {
         $orderDate = Carbon::now();
