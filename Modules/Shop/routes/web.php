@@ -23,7 +23,7 @@ Route::get('/tag/{tagSlug}', [ProductController::class, 'tag'])->name('products.
 
 Route::post('/payments/midtrans', [PaymentController::class, 'midtrans'])->name('payments.midtrans');
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     Route::get('orders/checkout', [OrderController::class, 'checkout'])->name('orders.checkout');
     Route::post('orders/checkout', [OrderController::class, 'store'])->name('orders.store');
     Route::post('orders/shipping-fee', [OrderController::class, 'shippingFee'])->name('orders.shipping_fee');
@@ -36,3 +36,8 @@ Route::middleware(['auth'])->group(function() {
 });
 
 Route::get('/{categorySlug}/{productSlug}', [ProductController::class, 'show'])->name('products.show');
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/checkout', [OrderController::class, 'checkout']);
+    Route::post('/orders', [OrderController::class, 'store']);
+});

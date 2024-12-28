@@ -1,7 +1,12 @@
+
+const dotenvExpand = require('dotenv-expand');
+dotenvExpand(require('dotenv').config({ path: '../../.env'/*, debug: true*/ }));
+
+
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import { readdirSync, statSync } from 'fs';
-import { join,relative,dirname } from 'path';
+import { join, relative, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 export default defineConfig({

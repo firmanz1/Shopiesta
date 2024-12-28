@@ -25,7 +25,7 @@
         </div>
         <div class="col-4 col-md-4 col-lg-5">
             {{ $service['service'] }} ({{$service['description']}})
-        </div>
+        </div>  
         <div class="col-3 col-md-2 col-lg-2">
             {{ $service['etd']}}
         </div>

@@ -65,11 +65,12 @@
                         @else
                             <span class="active-price text-dark">IDR {{ $product->price_label }}</span>
                         @endif
-                    </div>
+                    </div>  
                     <hr class="my-6">
                     <div class="product-select mt-3 row justify-content-start g-2 align-items-center">
                         @include ('themes.shop.shared.flash')
                         {{ html()->form('post', route('carts.store'))->open() }}
+                        @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}"/>
                         <div class="row">
                             <div class="col-md-2 col-2">

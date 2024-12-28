@@ -120,4 +120,4 @@ class CartRepository implements CartRepositoryInterface
             'total_weight' => $totalWeight,
         ]);
     }
-} 
+}

@@ -2,8 +2,9 @@
 
 namespace Modules\Shop\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Support\Renderable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -23,22 +24,31 @@ class OrderController extends Controller
         $this->addressRepository = $addressRepository;
         $this->cartRepository = $cartRepository;
         $this->orderRepository = $orderRepository;
+
+        $this->middleware('auth'); // Pastikan hanya pengguna yang terautentikasi yang dapat mengakses kontroler ini
     }
-   
-    public function checkout()
+
+    public function checkout(Request $request)
     {
+
         $this->data['cart'] = $this->cartRepository->findByUser(auth()->user());
         $this->data['addresses'] = $this->addressRepository->findByUser(auth()->user());
-    
+
         return $this->loadTheme('orders.checkout', $this->data);
     }
 
+
     public function store(Request $request)
     {
+        // Di metode store
+        if (!Auth::check()) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
         $address = $this->addressRepository->findByID($request->get('address_id'));
         $cart = $this->cartRepository->findByUser(auth()->user());
         $selectedShipping = $this->getSelectedShipping($request);
-        
+
         DB::beginTransaction();
         try {
             $order = $this->orderRepository->create($request->user(), $cart, $address, $selectedShipping);
@@ -57,7 +67,7 @@ class OrderController extends Controller
     {
         $address = $this->addressRepository->findByID($request->get('address_id'));
         $cart = $this->cartRepository->findByUser(auth()->user());
-        
+
         $availableServices = $this->calculateShippingFee($cart, $address, $request->get('courier'));
 
         $selectedPackage = null;
@@ -83,9 +93,11 @@ class OrderController extends Controller
 
     public function shippingFee(Request $request)
     {
+        $shippingFee = $request->get('shipping_fee');
+
         $address = $this->addressRepository->findByID($request->get('address_id'));
         $cart = $this->cartRepository->findByUser(auth()->user());
-        
+
         $availableServices = $this->calculateShippingFee($cart, $address, $request->get('courier'));
         return $this->loadTheme('orders.available_services', ['services' => $availableServices]);
     }
@@ -94,7 +106,7 @@ class OrderController extends Controller
     {
         $address = $this->addressRepository->findByID($request->get('address_id'));
         $cart = $this->cartRepository->findByUser(auth()->user());
-        
+
         $availableServices = $this->calculateShippingFee($cart, $address, $request->get('courier'));
 
         $selectedPackage = null;
@@ -117,13 +129,14 @@ class OrderController extends Controller
         ];
     }
 
-    private function calculateShippingFee($cart, $address, $courier) {
+    private function calculateShippingFee($cart, $address, $courier)
+    {
         $shippingFees = [];
 
         try {
             $response = Http::withHeaders([
                 'key' => env('API_ONGKIR_KEY'),
-            ])->post(env('API_ONGKIR_BASE_URL'). 'cost', [
+            ])->post(env('API_ONGKIR_BASE_URL') . 'cost', [
                 'origin' => env('API_ONGKIR_ORIGIN'),
                 'destination' => $address->city,
                 'weight' => $cart->total_weight,

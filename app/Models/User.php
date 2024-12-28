@@ -12,7 +12,7 @@ use App\Traits\UuidTrait;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, UuidTrait;
+    use HasApiTokens, HasFactory, Notifiable, UuidTrait;
 
     /**
      * The attributes that are mass assignable.

@@ -5,6 +5,8 @@ namespace Modules\Shop\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
 
 use Modules\Shop\Repositories\Front\Interfaces\CartRepositoryInterface;
 use Modules\Shop\Repositories\Front\Interfaces\ProductRepositoryInterface;
@@ -27,24 +29,22 @@ class CartController extends Controller
      * @return Renderable
      */
     public function index()
-{
-    // Periksa apakah pengguna sudah login
-    if (!auth()->check()) {
-        return redirect(route('login'))->with('error', 'Anda harus login untuk melihat keranjang');
+    {
+        if (!auth()->check()) {
+            return redirect(route('login'))->with('error', 'Anda harus login untuk melihat keranjang');
+        }
+
+        // Ambil keranjang berdasarkan user
+        $user = auth()->user();
+        $cart = $this->cartRepository->findByUser($user);
+
+        $this->data['cart'] = $cart;
+
+        return $this->loadTheme('carts.index', $this->data);
     }
 
-    // Ambil data pengguna
-    $user = auth()->user();
 
-    // Ambil keranjang berdasarkan user
-    $cart = $this->cartRepository->findByUser($user);
 
-    $this->data['cart'] = $cart;
-
-    return $this->loadTheme('carts.index', $this->data);
-}
-
- 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
@@ -78,6 +78,7 @@ class CartController extends Controller
             return redirect(shop_product_link($product))->with('error', 'Tidak dapat menambahkan item ke keranjang');
         }
 
+
         return redirect(shop_product_link($product))->with('success', 'Berhasil menambahkan item ke keranjang');
     }
 
@@ -109,7 +110,7 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
-        dd(request()->all());
+
         $items = $request->get('qty');
         $this->cartRepository->updateQty($items);
 

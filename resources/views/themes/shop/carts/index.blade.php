@@ -45,6 +45,7 @@
                                                 </span>
                                                 <div class="mt-2 small lh-1">
                                                     <a href="{{ route('carts.destroy', [$item->id]) }}" onclick="return confirm('Are you sure to delete?')" class="text-decoration-none text-inherit">
+                                                        @csrf
                                                         <span class="me-1 align-text-bottom">
                                                             <i class='bx bx-trash'></i>
                                                         </span>
@@ -111,6 +112,7 @@
                                 <div class="d-grid mb-1 mt-4">
                                     <!-- btn -->
                                     <a class="btn btn-first btn-lg d-flex justify-content-between align-items-center" href="{{ route('orders.checkout') }}">
+                                        @csrf
                                         Go to Checkout
                                         <span class="fw-bold">{{ $cart->grand_total_label }}</span>
                                     </a>
