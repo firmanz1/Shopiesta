@@ -7,10 +7,10 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-6">
-        <h1>Popular</h1>
+        <h1>Ga laku</h1>
       </div>
       <div class="col-6 text-end">
-        <a href="#" class="btn-first">View All</a>
+        <a href="{{ route('products.index') }}" class="btn-first">View All</a>
       </div>
     </div>
     <div class="row mt-5">
@@ -50,7 +50,7 @@
       </div>
       <div class="col-lg-3 col-6 mt-3 mt-lg-0">
         <div class="card card-body p-lg-4 p3">
-          <a href="#"><img src="{{ asset('themes/shop/assets/img/k3.jpg') }}" alt="" class="img-fluid"></a>
+          <a href="#"><img src="{{ asset('themes/shop/assets/img/p1.jpg') }}" alt="" class="img-fluid"></a>
           <h3 class="product-name mt-3">Product 3</h3>
           <div class="rating">
             <i class="bx bxs-star"></i>
@@ -67,17 +67,9 @@
       </div>
       <div class="col-lg-3 col-6 mt-3 mt-lg-0">
         <div class="card card-body p-lg-4 p3">
-          <a href="#"><img src="{{ asset('themes/shop/assets/img/k4.jpg') }}" alt="" class="img-fluid"></a>
+          <a href="#"><img src="{{ asset('themes/shop/assets/img/p2.jpg') }}" alt="" class="img-fluid"></a>
           <h3 class="product-name mt-3">Product 4</h3>
           <div class="rating">
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
             <i class="bx bxs-star"></i>
             <i class="bx bxs-star"></i>
             <i class="bx bxs-star"></i>
@@ -99,16 +91,16 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-6">
-        <h1>Latest</h1>
+        <h1>Ga Jual </h1>
       </div>
       <div class="col-6 text-end">
-        <a href="#" class="btn-first">View All</a>
+        <a href="{{ route('products.index') }}" class="btn-first">View All</a>
       </div>
     </div>
     <div class="row mt-5">
       <div class="col-lg-3 col-6">
         <div class="card card-body p-lg-4 p3">
-          <a href="#"><img src="{{ asset('themes/shop/assets/img/k3.jpg') }}" alt="" class="img-fluid"></a>
+          <a href="#"><img src="{{ asset('themes/shop/assets/img/p3.jpg') }}" alt="" class="img-fluid"></a>
           <h3 class="product-name mt-3">Product 1</h3>
           <div class="rating">
             <i class="bx bxs-star"></i>
@@ -159,19 +151,9 @@
       </div>
       <div class="col-lg-3 col-6 mt-3 mt-lg-0">
         <div class="card card-body p-lg-4 p3">
-          <a href="#"><img src="{{ asset('themes/shop/assets/img/k4.jpg') }}" alt="" class="img-fluid"></a>
+          <a href="#"><img src="{{ asset('themes/shop/assets/img/p4.jpg') }}" alt="" class="img-fluid"></a>
           <h3 class="product-name mt-3">Product 4</h3>
           <div class="rating">
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
-            <i class="bx bxs-star"></i>
             <i class="bx bxs-star"></i>
             <i class="bx bxs-star"></i>
             <i class="bx bxs-star"></i>

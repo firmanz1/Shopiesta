@@ -1,11 +1,11 @@
-<div class="container menu-wrapper fixed-top d-none d-lg-block">
+{{-- <div class="container menu-wrapper fixed-top d-none d-lg-block">
     <div class="menu d-flex justify-content-center align-items-center">
     <a class="nav-link active" href="#">Home</a>
     <a class="nav-link" href="#">Best Seller</a>
     <a class="nav-link" href="#">New Arrival</a>
     <a class="nav-link" href="#">Blog</a>
     </div>
-  </div>
+  </div> --}}
   
   <!-- Header -->
   <section class="header">
@@ -17,10 +17,10 @@
         </div>
         <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('themes/shop/assets/img/s1.jpg') }}" class="d-block w-100" alt="slide 1">
+            <img src="{{ asset('themes/shop/assets/img/slide1.jpg') }}" class="d-block w-100" alt="slide 1">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('themes/shop/assets/img/s3.jpg') }}" class="d-block w-100" alt="slide 2">
+            <img src="{{ asset('themes/shop/assets/img/slide2.jpg') }}" class="d-block w-100" alt="slide 2">
         </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

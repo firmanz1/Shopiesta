@@ -5,12 +5,12 @@
     <div class="container">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('products.index') }}" >Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Checkout</li>
             </ol>
         </nav>
     </div>
-</section>
+</section>      
 <section class="main-content">
     <div class="container">
         <div class="row">
@@ -25,8 +25,8 @@
                         <form method="POST" action="{{ route('orders.store') }}">
                             @csrf
                             <div class="d-flex justify-content-between">
-                                <h5 class="mb-0"><i class='bx bx-map'></i> Delivery Address</h5>
-                                <a href="#" class="btn btn-outline-secondary btn-sm">Add a new address</a>
+                                <h5 class="mb-0"><i class='bx bx-map'></i> Alamat Pengiriman</h5>
+                                <a href="#" class="btn btn-outline-secondary btn-sm">Tambahkan Alamat Baru</a>
                             </div>
                             <div class="mt-3">
                                 <div class="row">
@@ -51,7 +51,7 @@
                                                 <abbr title="Phone">P: {{ $address->phone }}</abbr>
                                             </address>
                                             @if ($address->is_primary)
-                                            <span class="text-danger">Default address</span>
+                                            <span class="text-danger">Alamat Default</span>
                                             @endif
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@
                                     @endforelse
                                 </div>
                             </div>
-                            <h5 class="mb-0"><i class='bx bxs-truck'></i> Delivery Service</h5>
+                            <h5 class="mb-0"><i class='bx bxs-truck'></i> Layanan Pngiriman</h5>
                             <div class="mt-3">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input courier-code" type="radio" name="courier" id="inlineRadio1" value="jne">
@@ -82,7 +82,7 @@
                                 <ul class="list-group list-group-flush available-services" style="display: none;"></ul>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                <a href="{{ route('products.index') }}" class="btn btn-second">Back to Shopping Cart</a>
+                                <a href="{{ route('products.index') }}" class="btn btn-second">Kembali Ke Keranjang Belanja</a>
                                 <button type="submit" class="btn btn-first">Place Order</button>
                             </div>
                         </form>
@@ -138,18 +138,18 @@
                                             <div class="fw-bold">IDR {{ $cart->discount_amount_label }}</div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <div>Tax (11%)</div>
+                                            <div>Pajak (11%)</div>
                                             <div class="fw-bold">IDR {{ $cart->tax_amount_label }}</div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mb-2">
-                                            <div>Shipping Fee</div>
+                                            <div>Biaya Pengiriman</div>
                                             <div class="fw-bold" id="shipping-fee">IDR 0</div>
                                         </div>
 
                                     </li>
                                     <li class="list-group-item py-3">
                                         <div class="d-flex align-items-center justify-content-between mb-2 fw-bold">
-                                            <div>Grand Total</div>
+                                            <div>Jumlah Keseluruhan</div>
                                             <div id="grand-total">IDR {{ $cart->grand_total_label }}</div>
                                         </div>
                                     </li>

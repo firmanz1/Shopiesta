@@ -5,7 +5,8 @@ use App\Livewire\Admin\Dashboard;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Livewire\Admin\Product\ProductIndex;
-use App\Livewire\Admin\Product\ProductUpdate;   
+use App\Livewire\Admin\Product\ProductUpdate;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,4 +28,11 @@ ROute::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/categories', CategoryIndex::class)->name('categories.index');
     Route::get('/products', ProductIndex::class)->name('products.index');
     Route::get('/products/{id}/edit', ProductUpdate::class)->name('products.update');
+
+
+Route::get('/admin/products/edit/{productId}', ProductUpdate::class)->name('admin.products.update');
+
+    
+    
+
 });

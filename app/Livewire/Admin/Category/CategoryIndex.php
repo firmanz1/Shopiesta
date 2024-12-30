@@ -21,7 +21,7 @@ class CategoryIndex extends Component
         $categories = Category::orderBy('created_at', 'desc');
 
         if (!empty($this->search)) {
-            $categories = $categories->where('name', 'LIKE', '%'. $this->search . '%');
+            $categories = $categories->where('name', 'LIKE', '%' . $this->search . '%');
         }
 
         return view('livewire.admin.category.category-index',  [

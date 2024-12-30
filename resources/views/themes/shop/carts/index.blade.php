@@ -6,7 +6,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Products</li>
+                <li class="breadcrumb-item active" aria-current="page">Barang</li>
             </ol>
         </nav>
     </div>
@@ -17,7 +17,7 @@
             <section class="col-lg-12 col-md-12 shopping-cart">
                 <div class="card mb-4 bg-light border-0 section-header">
                     <div class="card-body p-5">
-                        <h2 class="mb-0">Shopping Cart</h2>
+                        <h2 class="mb-0">Keranjang Belanja</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -44,12 +44,12 @@
                                                     @endif
                                                 </span>
                                                 <div class="mt-2 small lh-1">
-                                                    <a href="{{ route('carts.destroy', [$item->id]) }}" onclick="return confirm('Are you sure to delete?')" class="text-decoration-none text-inherit">
+                                                    <a href="{{ route('carts.destroy', [$item->id]) }}" onclick="return confirm('Seriusan bang? Mending co si kalo kataku')" class="text-decoration-none text-inherit">
                                                         @csrf
                                                         <span class="me-1 align-text-bottom">
                                                             <i class='bx bx-trash'></i>
                                                         </span>
-                                                        <span class="text-muted">Remove</span>
+                                                        <span class="text-muted">Menghapus</span>
                                                     </a>
                                                 </div>
                                             </div>
@@ -66,8 +66,8 @@
                             @endforeach
                         </ul>
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="{{ route('products.index') }}" class="btn btn-first">Continue Shopping</a>
-                            <button type="submit" class="btn btn-second">Update Cart</button>
+                            <a href="{{ route('products.index') }}" class="btn btn-first">Lanjutkan Belanja</a>
+                            <button type="submit" class="btn btn-second">Update Keranjang</button>
                         </div>
                         {{ html()->form()->close() }}
                     </div>
@@ -75,7 +75,7 @@
                         <div class="mb-5 card mt-6 shadow">
                             <div class="card-body p-6">
                                 <!-- heading -->
-                                <h2 class="h5 mb-4">Summary</h2>
+                                <h2 class="h5 mb-4">Ringkasan</h2>
                                 <div class="card mb-2">
                                     <!-- list group -->
                                     <ul class="list-group list-group-flush">
@@ -96,14 +96,14 @@
                                         <!-- list group item -->
                                         <li class="list-group-item d-flex justify-content-between align-items-start">
                                             <div class="me-auto">
-                                                <div class="fw-bold">Subtotal</div>
+                                                <div class="fw-bold">Jumlah Keseluruhan</div>
                                             </div>
                                             <span class="fw-bold">{{ $cart->sub_total_price_label }}</span>
                                         </li>
                                         <!-- list group item -->
                                         <li class="list-group-item d-flex justify-content-between align-items-start">
                                             <div class="me-auto">
-                                                <div>Tax</div>
+                                                <div>Pajak</div>
                                             </div>
                                             <span>{{ $cart->tax_amount_label }}</span>
                                         </li>
@@ -120,7 +120,7 @@
                                 <!-- text -->
                                 <p>
                                     <small>
-                                        By placing your order, you agree to be bound by the Freshcart
+                                        Dengan melakukan pemesanan, Anda setuju untuk terikat oleh
                                         <a href="#!">Terms of Service</a>
                                         and
                                         <a href="#!">Privacy Policy.</a>

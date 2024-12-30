@@ -79,8 +79,9 @@
                                     @forelse ($products as $product)
                                     <tr>
                                         <td>
-                                            <span class="avatar me-3" style="background-image: url(https://placehold.jp/150x150.png)"></span>
+                                            <span class="avatar me-3" style="background-image: url('{{ asset('storage/' . $product->featured_image) }}')"></span>
                                         </td>
+                                        
                                         <td>
                                             {{ $product->sku }}
                                         </td>
