@@ -42,7 +42,7 @@
                                 <div class="text-secondary">
                                     Show
                                     <div class="mx-2 d-inline-block">
-                                        <input type="text" wire:model="perPage" wire:change="changePerPage($event.target.value)" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
+                                        <input type="number" wire:model="perPage" wire:change="changePerPage($event.target.value)" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count" style="width: 50px">
                                     </div>
                                     entries
                                 </div>
@@ -51,9 +51,20 @@
                                     <div class="ms-2 d-inline-block">
                                         <input type="text" wire:model.live="search" class="form-control form-control-sm" aria-label="Search invoice">
                                     </div>
+                                    <div class="row">     
+                                    <div class="col-12 p-3">
+                                        @if (session('success'))
+                                        <div class="alert alert-success">{{ session('success') }}</div>
+                                        @endif
+                                        @if (session('error'))
+                                        <div class="alert alert-danger">{{ session('error') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
+                       
                         <div class="table-responsive">
                             <table class="table card-table table-vcenter text-nowrap datatable">
                                 <thead>
@@ -96,4 +107,4 @@
         </div>
     </div>
     <livewire:admin.category.create-update-category />
-</div>
+</div> 

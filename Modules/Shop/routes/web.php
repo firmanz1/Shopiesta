@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/carts/{id}/remove', [CartController::class, 'destroy'])->name('carts.destroy');
     Route::post('/carts', [CartController::class, 'store'])->name('carts.store');
     Route::put('/carts', [CartController::class, 'update'])->name('carts.update');
+    
 });
 
 Route::get('/{categorySlug}/{productSlug}', [ProductController::class, 'show'])->name('products.show');

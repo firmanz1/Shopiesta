@@ -38,6 +38,10 @@ class Category extends Model
     public function products()
     {
         return $this->belongsToMany('Modules\Shop\Entities\Product', 'shop_categories_products', 'product_id', 'category_id');
+{
+    return $this->hasMany(Product::class);
+}
+
     }
 
     public static function childIDs($parentID = null)

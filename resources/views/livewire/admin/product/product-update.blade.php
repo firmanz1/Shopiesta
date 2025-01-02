@@ -16,12 +16,20 @@
                             <input type="text" id="sku" wire:model="sku" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
+                            <label for="type" class="form-label">Jenis</label>
+                            <input type="text" id="type" wire:model="type" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama</label>
                             <input type="text" id="name" wire:model="name" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label for="price" class="form-label">Price</label>
+                            <label for="price" class="form-label">Harga</label>
                             <input type="number" id="price" wire:model="price" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sale_price" class="form-label">diskon</label>
+                            <input type="number" id="sale_price" wire:model="sale_price" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
@@ -38,12 +46,18 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="featured_image" class="form-label">Featured Image</label>
+                            <label for="featured_image" class="form-label">Upload Gambar</label>
                             <input type="file" id="featured_image" wire:model="featured_image" class="form-control">
-                            @if($featured_image)
-                                <img src="{{ $featured_image->temporaryUrl() }}" class="mt-2" width="150" alt="Featured Image Preview">
-                            @endif
+                            @if ($this->featured_image && $this->featured_image instanceof \Livewire\TemporaryUploadedFile)
+                            <img src="{{ $this->featured_image->temporaryUrl() }}" alt="{{ $this->product->name }}">
+                        @elseif ($this->product->featured_image)
+                            <img src="{{ asset('storage/' . $this->product->featured_image) }}" alt="{{ $this->product->name }}">
+                        @endif
                         </div>                        
+                        <div class="mb-3">
+                            <label for="kutipan" class="form-label">Kutipan </label>
+                            <textarea id="kutipan" wire:model="kutipan" class="form-control"></textarea>
+                        </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <textarea id="description" wire:model="description" class="form-control"></textarea>

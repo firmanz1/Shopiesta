@@ -133,4 +133,8 @@ class Product extends Model
 
         return $this->inventory->qty;
     }
+    // public function category()
+    // {
+    //     return $this->belongsTo(Category::class);
+    // }
 }

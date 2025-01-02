@@ -17,10 +17,14 @@
         </div>
         <div class="carousel-inner">
         <div class="carousel-item active">
+            <a href="{{ route('products.index') }}">
             <img src="{{ asset('themes/shop/assets/img/slide1.jpg') }}" class="d-block w-100" alt="slide 1">
+            </a>
         </div>
         <div class="carousel-item">
+            <a href="{{ route('products.index') }}">
             <img src="{{ asset('themes/shop/assets/img/slide2.jpg') }}" class="d-block w-100" alt="slide 2">
+            </a>
         </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

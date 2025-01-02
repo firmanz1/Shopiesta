@@ -5,7 +5,7 @@
     <div class="container">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ ('/home') }}"class="text-decoration-none">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Products</li>
             </ol>
         </nav>
@@ -20,7 +20,7 @@
             <section class="col-lg-9 col-md-12 products">
                 <div class="card mb-4 bg-light border-0 section-header">
                     <div class="card-body p-5">
-                        <h2 class="mb-0">Accessories</h2>
+                        <h2 class="mb-0">Semua Product </h2>
                     </div>
                 </div>
                 <div class="row">

@@ -34,7 +34,7 @@ class CategoryIndex extends Component
         $category = Category::findOrFail($id);
         $category->delete();
 
-        session()->flash('success', 'Category deleted!');
+        session()->flash('success', 'Category Berhasil di hapus');
     }
 
     public function changePerPage($perPage)

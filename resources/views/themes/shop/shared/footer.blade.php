@@ -10,7 +10,7 @@
           <h3 class="mb-3">Navigation</h3>
           <ul class="p-0">
             <li><a href="#"></a></li>
-            <li class="mt-3"><a href="#"></a></li>
+            <li class="mt-3"><a href="/admin/dashboard" >Manage Product</a></li>
             <li class="mt-3"><a href="#"></a></li>
             <li class="mt-3"><a href="#"></a></li>
             <li class="mt-3"><a href="#"></a></li>
@@ -27,8 +27,8 @@
           <p>&copy; 2024 kelompok 4</p>
         </div>
         <div class="col-md-6 text-sm-end">
-          <a href="#"><i class='bx bxl-instagram-alt' ></i></a>
-          <a href="#"><i class='bx bxl-facebook-circle' ></i></a>
+          <a href="https://www.instagram.com/firmansyah_z1/"><i class='bx bxl-instagram-alt' ></i></a>
+          <a href="https://wa.me/6283196811205" target="_blank"><i class="bx bxl-whatsapp"></i></a>
         </div>
       </div>
     </div>

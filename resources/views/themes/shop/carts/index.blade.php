@@ -5,7 +5,8 @@
     <div class="container">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ ('/home') }}"class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('products') }} "class="text-decoration-none">Products</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Barang</li>
             </ol>
         </nav>
@@ -30,9 +31,9 @@
                                 <div class="row align-items-center">
                                     <div class="col-6 col-md-6 col-lg-7">
                                         <div class="d-flex">
-                                            <img src="{{ asset('img/p1.jpg') }}" alt="Ecommerce" style="height: 70px;">
+                                            <img src="{{ Storage::url($item->product->featured_image) }}" alt="{{ $item->product->name }}" class="img-fluid" style="height: 70px;" alt="Ecommerce" style="height: 70px;">
                                             <div class="ms-3">
-                                                <a href="{{ shop_product_link($item->product) }}">
+                                                <a href="{{ shop_product_link($item->product) }}" class="text-decoration-none">
                                                     <h6 class="mb-0">{{ $item->product->name }}</h6>
                                                 </a>
                                                 <span>
@@ -66,7 +67,7 @@
                             @endforeach
                         </ul>
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="{{ route('products.index') }}" class="btn btn-first">Lanjutkan Belanja</a>
+                            <a href="{{ route('products.index') }}" class="btn btn-first">Kembali Belanja</a>
                             <button type="submit" class="btn btn-second">Update Keranjang</button>
                         </div>
                         {{ html()->form()->close() }}

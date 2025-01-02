@@ -5,7 +5,7 @@
     <div class="container">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ ('/home') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('products') }} ">Products</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
             </ol>
@@ -19,10 +19,12 @@
                 <div id="product-images" class="carousel slide" data-ride="carousel">
                     <!-- slides -->
                     <div class="carousel-inner">
-                        <div class="carousel-item active"> <img src="{{ asset('img/1.jpg') }}" alt="Product 1"> </div>
-                        <div class="carousel-item"> <img src="{{ asset('img/2.jpg') }}" alt="Product 2"> </div>
-                        <div class="carousel-item"> <img src="{{ asset('img/3.jpg') }}" alt="Product 3"> </div>
-                        <div class="carousel-item"> <img src="{{ asset('img/4.jpg') }}" alt="Product 4"> </div>
+                        {{-- @if($featured_image) --}}
+                        <div class="carousel-item active"> <img src="{{ Storage::url($product->featured_image) }}" alt="{{ $product->name }}" class="img-fluid"></div>
+                        {{-- @endif --}}
+                        <div class="carousel-item"> <img src="{{ asset('img/prodi.png') }}" alt="Product 2"> </div>
+                        <div class="carousel-item"> <img src="{{ Storage::url($product->featured_image) }}" alt="{{ $product->name }}" class="img-fluid" alt="Product 3"> </div>
+                        <div class="carousel-item"> <img src="{{ Storage::url($product->featured_image) }}" alt="{{ $product->name }}" class="img-fluid" alt="Product 4"> </div>
                     </div> <!-- Left right -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#product-images" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -34,13 +36,13 @@
                     </button>
                     <!-- Thumbnails -->
                     <ol class="carousel-indicators list-inline">
-                        <li class="list-inline-item active"> <a id="carousel-selector-0" class="active" data-bs-slide-to="0" data-bs-target="#product-images"> <img src="{{ asset('img/1.jpg') }}" class="img-fluid"> </a> </li>
+                        <li class="list-inline-item active"> <a id="carousel-selector-0" class="active" data-bs-slide-to="0" data-bs-target="#product-images"> <img src="{{ Storage::url($product->featured_image) }}" alt="{{ $product->name }}" class="img-fluid"> </a> </li>
                         <li class="list-inline-item"> <a id="carousel-selector-1" data-bs-slide-to="1" data-bs-target="#product-images">
-                                <img src="{{ asset('img/2.jpg') }}" class="img-fluid"> </a> </li>
+                            <img src="{{ Storage::url($product->featured_image) }}" alt="{{ $product->name }}" class="img-fluid"> </a> </li>
                         <li class="list-inline-item"> <a id="carousel-selector-2" data-bs-slide-to="2" data-bs-target="#product-images">
-                                <img src="{{ asset('img/3.jpg') }}" class="img-fluid"> </a> </li>
+                            <img src="{{ Storage::url($product->featured_image) }}" alt="{{ $product->name }}" class="img-fluid"> </a> </li>
                         <li class="list-inline-item"> <a id="carousel-selector-3" data-bs-slide-to="3" data-bs-target="#product-images">
-                                <img src="{{ asset('img/4.jpg') }}" class="img-fluid"> </a> </li>
+                            <img src="{{ Storage::url($product->featured_image) }}" alt="{{ $product->name }}" class="img-fluid"> </a> </li>
                     </ol>
                 </div>
             </div>
@@ -95,11 +97,11 @@
                                 </tr>
                                 <tr>
                                     <td>Availability:</td>
-                                    <td>{{ $product->stock_status_label }}</td>
+                                    <td>{{ $product->stock_status }}</td>
                                 </tr>
                                 <tr>
                                     <td>Type:</td>
-                                    <td>Fruits</td>
+                                    <td>{{ $product->type }}</td>
                                 </tr>
                                 <tr>
                                     <td>Shipping:</td>
@@ -113,9 +115,9 @@
                     <hr class="my-6">
                     <div class="product-share">
                         <ul>
+                            <li><a href="https://www.instagram.com/firmansyah_z1/" target="_blank"><i class="bx bxl-instagram"></i></a></li>
+                            <li><a href="https://wa.me/6283196811205" target="_blank"><i class="bx bxl-whatsapp"></i></a></li>
                             <li><a href="#"><i class="bx bxl-facebook-circle"></i></a></li>
-                            <li><a href="#"><i class="bx bxl-pinterest"></i></a></li>
-                            <li><a href="#"><i class="bx bxl-whatsapp"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -147,7 +149,8 @@
                                     <label>Your Review</label>
                                     <textarea cols="4" class="form-control"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <br important!> 
+                                <button type="submit" class="btn btn-primary p-3">Submit</button>
                             </form>
                         </div>
                     </div>

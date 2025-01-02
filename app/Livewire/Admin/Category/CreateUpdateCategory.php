@@ -83,7 +83,7 @@ class CreateUpdateCategory extends Component
         if ($this->category->update($params)) {
             $this->dispatch('category-updated');
 
-            session()->flash('success', 'Category updated!');
+            session()->flash('success', 'Category berhasil diperbarui');
             $this->reset();
             return;
         }

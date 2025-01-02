@@ -29,6 +29,11 @@ class ProductController extends Controller
             'min' => 10000,
             'max' => 75000,
         ];
+        $this->defaultPriceRange = [
+            'min' => 10000,
+            'max' => 75000,
+        ];
+        
 
         $this->data['categories'] = $this->categoryRepository->findAll();
         $this->data['filter']['price'] = $this->defaultPriceRange;
@@ -41,6 +46,10 @@ class ProductController extends Controller
             '?sort=price&order=desc' => 'Price: High to Low',
             '?sort=publish_date&order=desc' => 'Newest Item',
         ];
+        // $this->data['defaultPriceRange'] = $this->defaultPriceRange;
+        // $this->data['filterPrice'] = $this->data['filter']['price'];
+
+
     }
     /**
      * Display a listing of the resource.
@@ -66,12 +75,12 @@ class ProductController extends Controller
             $options['sort'] = $sort;
 
             $this->sortingQuery = '?sort=' . $sort['sort'] . '&order=' . $sort['order'];
-            
+
             $this->data['sortingQuery'] = $this->sortingQuery;
         }
-        
+
         $this->data['products'] = $this->productRepository->findAll($options);
-        
+
         return $this->loadTheme('products.index', $this->data);
     }
 
@@ -95,7 +104,7 @@ class ProductController extends Controller
     public function tag($tagSlug)
     {
         $tag = $this->tagRepository->findBySlug($tagSlug);
-        
+
         $options = [
             'per_page' => $this->perPage,
             'filter' => [
@@ -112,7 +121,7 @@ class ProductController extends Controller
     public function show($categorySlug, $productSlug)
     {
         $sku = Arr::last(explode('-', $productSlug));
-       
+
         $product = $this->productRepository->findBySKU($sku);
 
         $this->data['product'] = $product;
@@ -127,7 +136,7 @@ class ProductController extends Controller
         }
 
         $prices = explode(' - ', $request->get('price'));
-        if (count($prices) < 0) {
+        if (count($prices) < 2) {
             return $this->defaultPriceRange;
         }
 
@@ -137,7 +146,9 @@ class ProductController extends Controller
         ];
     }
 
-    function sortingRequest(Request $request) {
+
+    function sortingRequest(Request $request)
+    {
         $sort = [];
 
         if ($request->get('sort') && $request->get('order')) {

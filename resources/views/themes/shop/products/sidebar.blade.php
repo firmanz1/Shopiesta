@@ -2,8 +2,10 @@
     @if ($categories->count() > 0)
     <div class="sidebar-widget">
         <div class="widget-title">
-            <h5>Categories</h5>
-        </div>
+            <a href="{{ route('products.index') }}" style="text-decoration: none;">
+                <h5>Categories</h5>
+            </a>
+        </div>        
         <div class="widget-content widget-categories">
             <ul class="nav nav-category">
                 @foreach($categories as $category)
@@ -20,13 +22,13 @@
             <h5>Price Range</h5>
         </div>
         <div class="widget-content shop-by-price">
-            <form method="GET" action="products.html">
+            <form method="GET" action="{{ url()->current() }}">
                 <div class="price-filter">
                     <div class="price-filter-inner">
                         <div id="slider-range"></div>
                         <div class="price_slider_amount">
                             <div class="label-input d-lg-flex justify-content-between">
-                                <input type="text" id="amount" name="price" placeholder="Add Your Price" />
+                                <input type="text" id="amount" name="price" value="{{ request('price') }}" placeholder="Add Your Price" />
                                 <button type="submit" class="btn-first-sm">Filter</button>
                             </div>
                         </div>
@@ -34,5 +36,19 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>    
 </div>
+{{-- 
+@push('scripts')
+<script>
+    $("#slider-range").slider({
+        range: true,
+        min: {{ $defaultPriceRange['min'] }},
+        max: {{ $defaultPriceRange['max'] }},
+        values: [{{ $filterPrice['min'] ?? $defaultPriceRange['min'] }}, {{ $filterPrice['max'] ?? $defaultPriceRange['max'] }}],
+        slide: function (event, ui) {
+            $("#amount").val(ui.values[0] + " - " + ui.values[1]);
+        }
+    });
+</script>
+@endpush --}}

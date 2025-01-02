@@ -41,8 +41,8 @@ class ProductRepository implements ProductRepositoryInterface {
 
         if ($priceFilter) {
             $products = $products->where('price', '>=', $priceFilter['min'])
-                ->where('price', '<=', $priceFilter['max']);
-        }
+                                 ->where('price', '<=', $priceFilter['max']);
+        }        
 
         if ($sort) {
             $products = $products->orderBy($sort['sort'], $sort['order']);

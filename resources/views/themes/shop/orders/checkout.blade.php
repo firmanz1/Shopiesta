@@ -5,7 +5,8 @@
     <div class="container">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('products.index') }}" >Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ ('/home') }}"class="text-decoration-none" >Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('products') }} " class="text-decoration-none">Products</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Checkout</li>
             </ol>
         </nav>
@@ -82,7 +83,7 @@
                                 <ul class="list-group list-group-flush available-services" style="display: none;"></ul>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                <a href="{{ route('products.index') }}" class="btn btn-second">Kembali Ke Keranjang Belanja</a>
+                                <a href="{{ route('carts.index') }}" class="btn btn-second">Kembali Ke Keranjang Belanja</a>
                                 <button type="submit" class="btn btn-first">Place Order</button>
                             </div>
                         </form>
@@ -98,9 +99,9 @@
                                         <div class="row align-items-center">
                                             <div class="col-6 col-md-6 col-lg-7">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset('img/p1.jpg') }}" alt="Ecommerce" style="height: 70px;">
+                                                    <img src="{{ Storage::url($item->product->featured_image) }}" alt="{{ $item->product->name }}" style="height: 70px;">
                                                     <div class="ms-3">
-                                                        <a href="{{ shop_product_link($item->product) }}">
+                                                        <a href="{{ shop_product_link($item->product) }}" class="text-decoration-none">
                                                             <h6 class="mb-0">{{ $item->product->name }}</h6>
                                                         </a>
                                                         <span>
@@ -138,7 +139,7 @@
                                             <div class="fw-bold">IDR {{ $cart->discount_amount_label }}</div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <div>Pajak (11%)</div>
+                                            <div>Pajak (12%)</div>
                                             <div class="fw-bold">IDR {{ $cart->tax_amount_label }}</div>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mb-2">

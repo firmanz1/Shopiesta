@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg bg-light fixed-top py-4 shadow-sm">
   <div class="container">
-    <a class="navbar-brand" href="#">Sopi<span>esta</span></a>
+    <a class="navbar-brand" href="{{ ('/home') }}">Sopi<span>esta</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="input-group mx-auto mt-5 mt-lg-0">
-          <input type="text" class="form-control" placeholder="jangan cari apa-apa dulu, tar lagi siap" aria-label="jangan cari apa-apa dulu, tar lagi siap" aria-describedby="button-addon2">
+          <input type="text" class="form-control" placeholder="biarin aja dulu ini biar headernya ga kosong kali" aria-label="pencarian di header" aria-describedby="button-addon2">
           <button class="btn btn-outline-warning" type="button" id="button-addon2"><i class="bx bx-search" ></i></button>
         </div>
         <ul class="navbar-nav ms-auto mt-3 mt-sm-0">
@@ -19,7 +19,7 @@
           <li class="nav-item me-5">
             <a class="nav-link" href="{{ route('carts.index') }}">
               <i class="bx bx-cart-alt"></i>
-              <span class="badge text-bg-warning rounded-circle position-absolute">3</span>
+              <span class="badge text-bg-warning rounded-circle position-absolute">1</span>
             </a>
           </li>
           <!-- mobile menu -->
@@ -34,11 +34,16 @@
               <li><a class="dropdown-item" href="#">Blog</a></li>
             </ul>
           </div> --}}
-          <li class="nav-item mt-5 mt-lg-0 text-center">
+          {{-- <li class="nav-item mt-5 mt-lg-0 text-center">
             <a class="nav-link btn-second me-lg-3" href="#">Login</a>
-          </li>
+          </li> --}}
           <li class="nav-item mt-3 mt-lg-0 text-center">
-            <a class="nav-link btn-first" href="#">Register</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
+          <a href="#" class="nav-link btn-first" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              Logout
+          </a>
           </li>
         </ul>
       </div>

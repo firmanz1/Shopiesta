@@ -22,7 +22,7 @@ class CartRepository implements CartRepositoryInterface
             return Cart::create([
                 'user_id' => $user->id,
                 'expired_at' => (new Carbon())->addDay(7),
-                'tax_percent' => (env('TAX_PERCENT', 11) / 100)
+                'tax_percent' => (env('TAX_PERCENT', 12) / 100)
             ]);
         }
 
@@ -106,7 +106,7 @@ class CartRepository implements CartRepositoryInterface
         }
 
         $nettTotal = $baseTotalPrice - $discountAmount;
-        $taxAmount = 0.11 * $nettTotal;
+        $taxAmount = 0.12 * $nettTotal;
         $grandTotal = $nettTotal + $taxAmount;
 
         if ($baseTotalPrice) {
